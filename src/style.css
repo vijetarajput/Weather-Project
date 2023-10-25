@@ -42,7 +42,7 @@
 .wind {
   margin: 0 0 0 280px;
   position: relative;
-  top: -80px;
+  top: -70px;
 }
 h6 {
   font-weight: 400;
@@ -83,4 +83,7 @@ h6 {
 #tmp {
   display: inline;
   font-size: 4rem;
+}
+#desc {
+  text-transform: capitalize;
 }
