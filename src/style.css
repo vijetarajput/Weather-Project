@@ -26,7 +26,6 @@
 }
 .temp {
   display: inline;
-  margin-left: 20px;
 }
 .cloud {
   display: inline;
@@ -36,13 +35,13 @@
 .degree {
   display: inline;
   position: relative;
-  top: -20px;
+  top: -30px;
   left: -10px;
 }
 .wind {
-  margin: 0 0 0 280px;
+  margin: 0 0 0 380px;
   position: relative;
-  top: -70px;
+  top: -100px;
 }
 h6 {
   font-weight: 400;
@@ -82,7 +81,8 @@ h6 {
 }
 #tmp {
   display: inline;
-  font-size: 4rem;
+  font-size: 3.5rem;
+  margin-right: 5px;
 }
 #desc {
   text-transform: capitalize;

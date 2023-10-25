@@ -21,8 +21,8 @@
                 <h5 id="desc">Cloudy</h5>
             </div>
             <div class="temp">
-                <div class="cloud">☁️</div>
-                <h1 id="tmp">10 </h1>
+                <div class="cloud"><img id="icon" alt="" src="https://openweathermap.org/img/wn/10d@2x.png" /></div>
+                <h1 id="tmp"> </h1>
                 <div id="c" class="degree"><a href="#" style="text-decoration: none; color:black;">°C|</a></div>
                 <div id="f" class="degree"><a href="#" style="text-decoration: none; color:black;">°F</a></div>
             </div>
@@ -55,7 +55,8 @@
     }
 
     let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
-    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=london&appid=${apikey}&units=metric`;
+    let myCity = "london"
+    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
     function display(response) {
         console.log(response.data);
         let tempid = document.querySelector("#tmp");
@@ -68,6 +69,11 @@
         humi.innerHTML = response.data.main.humidity;
         let wind = document.querySelector("#wind");
         wind.innerHTML = Math.round(response.data.wind.speed);
+
+        let iconId = response.data.weather[0].icon;
+        let icon = document.querySelector("#icon");
+        icon.setAttribute("src", `https://openweathermap.org/img/wn/${iconId}@2x.png`);
+        icon.setAttribute("alt", response.data.weather[0].description);
 
         let dispDate = document.querySelector("#date");
         dispDate.innerHTML = formatDate(response.data.dt * 1000);
