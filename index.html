@@ -17,7 +17,7 @@
         <div class="main">
             <div class="heading">
                 <h2 id="cityNameH">London</h2>
-                <h5 id="date">Monday 16:00</h5>
+                <h5>Last updated at: <span id="date">Monday 16:00</span></h5>
                 <h5 id="desc">Cloudy</h5>
             </div>
             <div class="temp">
@@ -38,6 +38,22 @@
             style="text-decoration: none;">Open-source code </a>by Vijeta Singh</p>
 </body>
 <script>
+    function formatDate(timestamp) {
+        let date = new Date(timestamp);
+        let hours = date.getHours();
+        if (hours < 10) {
+            hours = `0${hours}`;
+        }
+        let minutes = date.getMinutes();
+        if (minutes < 10) {
+            minutes = `0${minutes}`;
+        }
+
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let day = days[date.getDay()];
+        return `${day} ${hours}:${minutes}`;
+    }
+
     let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
     let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=london&appid=${apikey}&units=metric`;
     function display(response) {
@@ -52,6 +68,9 @@
         humi.innerHTML = response.data.main.humidity;
         let wind = document.querySelector("#wind");
         wind.innerHTML = Math.round(response.data.wind.speed);
+
+        let dispDate = document.querySelector("#date");
+        dispDate.innerHTML = formatDate(response.data.dt * 1000);
     }
     axios.get(apiurl).then(display);
 
