@@ -16,6 +16,10 @@
     <div class="main_container">
         <div class="main">
             <div class="heading">
+                <form id="searchForm" class="mb-3">
+                    <input id="inputCityName" class="form" type="text" placeholder="Type city name" />
+                    <button id="submitBtn" type="submit" class="btn btn-success">Submit</button>
+                </form>
                 <h2 id="cityNameH">London</h2>
                 <h5>Last updated at: <span id="date">Monday 16:00</span></h5>
                 <h5 id="desc">Cloudy</h5>
@@ -53,32 +57,43 @@
         let day = days[date.getDay()];
         return `${day} ${hours}:${minutes}`;
     }
+    function search(city) {
+        let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
+        let myCity = city;
+        let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
+        function display(response) {
+            console.log(response.data);
+            let tempid = document.querySelector("#tmp");
+            tempid.innerHTML = response.data.main.temp;
+            let city = document.querySelector("#cityNameH");
+            city.innerHTML = response.data.name;
+            let description = document.querySelector("#desc");
+            description.innerHTML = response.data.weather[0].description;
+            let humi = document.querySelector("#Humi");
+            humi.innerHTML = response.data.main.humidity;
+            let wind = document.querySelector("#wind");
+            wind.innerHTML = Math.round(response.data.wind.speed);
 
-    let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
-    let myCity = "london"
-    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
-    function display(response) {
-        console.log(response.data);
-        let tempid = document.querySelector("#tmp");
-        tempid.innerHTML = response.data.main.temp;
-        let city = document.querySelector("#cityNameH");
-        city.innerHTML = response.data.name;
-        let description = document.querySelector("#desc");
-        description.innerHTML = response.data.weather[0].description;
-        let humi = document.querySelector("#Humi");
-        humi.innerHTML = response.data.main.humidity;
-        let wind = document.querySelector("#wind");
-        wind.innerHTML = Math.round(response.data.wind.speed);
+            let iconId = response.data.weather[0].icon;
+            let icon = document.querySelector("#icon");
+            icon.setAttribute("src", `https://openweathermap.org/img/wn/${iconId}@2x.png`);
+            icon.setAttribute("alt", response.data.weather[0].description);
 
-        let iconId = response.data.weather[0].icon;
-        let icon = document.querySelector("#icon");
-        icon.setAttribute("src", `https://openweathermap.org/img/wn/${iconId}@2x.png`);
-        icon.setAttribute("alt", response.data.weather[0].description);
+            let dispDate = document.querySelector("#date");
+            dispDate.innerHTML = formatDate(response.data.dt * 1000);
+        }
+        axios.get(apiurl).then(display);
 
-        let dispDate = document.querySelector("#date");
-        dispDate.innerHTML = formatDate(response.data.dt * 1000);
     }
-    axios.get(apiurl).then(display);
+    function handelSearch(event) {
+        event.preventDefault();
+        let input = document.querySelector("#inputCityName");
+        let btn = document.querySelector("#submitBtn");
+        search(input.value);
+    }
+
+    let form = document.querySelector("#searchForm");
+    form.addEventListener("submit", handelSearch);
 
 </script>
 
