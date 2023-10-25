@@ -1,3 +1,79 @@
-h1 {
-  color: blue;
+.search {
+  display: block;
+  margin: 0 auto;
+  border: 0.5px solid black;
+}
+.Sbtn {
+  background-color: aqua;
+  display: block;
+  margin: 0 auto;
+  border: 0.5px solid black;
+}
+.main_container {
+  margin-top: 50px;
+}
+.main {
+  display: block;
+  margin: 0 auto;
+  height: 300px;
+  max-width: 600px;
+  border: 0.5px solid black;
+  border-radius: 5px;
+}
+.heading {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.temp {
+  display: inline;
+  margin-left: 20px;
+}
+.cloud {
+  display: inline;
+  position: relative;
+  top: -15px;
+}
+.degree {
+  display: inline;
+  position: relative;
+  top: -20px;
+  left: -10px;
+}
+.wind {
+  margin: 0 0 0 280px;
+  position: relative;
+  top: -50px;
+}
+h6 {
+  font-weight: 400;
+  margin: 0;
+  width: 160px;
+  align-items: right;
+}
+.col {
+  border: 0.5px SOLID grey;
+  background-color: rgb(240, 239, 239);
+}
+.col:hover {
+  background-color: gray;
+}
+.days {
+}
+.myrow {
+  display: inline;
+}
+.mycard {
+  margin-top: 0;
+  margin-left: 5.3px;
+  height: 80px;
+  width: 65px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 5px;
+  display: inline-block;
+  justify-content: center;
+  text-align: center;
+}
+.mycard:hover {
+  background-color: grey;
 }
