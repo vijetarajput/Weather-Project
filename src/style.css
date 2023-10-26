@@ -42,6 +42,15 @@
   top: -30px;
   left: -10px;
 }
+.active {
+  color: blue;
+  cursor: default;
+  text-decoration: none;
+}
+.active:hover {
+  text-decoration: underline;
+  color: blue;
+}
 .wind {
   margin: 0 0 0 380px;
   position: relative;

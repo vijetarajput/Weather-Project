@@ -27,8 +27,10 @@
             <div class="temp">
                 <div class="cloud"><img id="icon" alt="" src="https://openweathermap.org/img/wn/10d@2x.png" /></div>
                 <h1 id="tmp"> </h1>
-                <div id="c" class="degree"><a href="#" style="text-decoration: none; color:black;">°C|</a></div>
-                <div id="f" class="degree"><a href="#" style="text-decoration: none; color:black;">°F</a></div>
+                <div id="c" class="degree"><a class="active" href="#">°C </a><span>|</span>
+                </div>
+                <div id="f" class="degree"><a class="active" href="#">°F</a>
+                </div>
             </div>
             <div class="wind">
                 <h6 style="display: inline">Humidity:</h6>
@@ -57,6 +59,35 @@
         let day = days[date.getDay()];
         return `${day} ${hours}:${minutes}`;
     }
+    // ---------------------
+    let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
+    let myCity = "london";
+    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
+    function display(response) {
+        console.log(response.data);
+        let tempid = document.querySelector("#tmp");
+        tempid.innerHTML = response.data.main.temp;
+        celsius = (response.data.main.temp);
+        console.log(celsius);
+        let city = document.querySelector("#cityNameH");
+        city.innerHTML = response.data.name;
+        let description = document.querySelector("#desc");
+        description.innerHTML = response.data.weather[0].description;
+        let humi = document.querySelector("#Humi");
+        humi.innerHTML = response.data.main.humidity;
+        let wind = document.querySelector("#wind");
+        wind.innerHTML = Math.round(response.data.wind.speed);
+
+        let iconId = response.data.weather[0].icon;
+        let icon = document.querySelector("#icon");
+        icon.setAttribute("src", `https://openweathermap.org/img/wn/${iconId}@2x.png`);
+        icon.setAttribute("alt", response.data.weather[0].description);
+
+        let dispDate = document.querySelector("#date");
+        dispDate.innerHTML = formatDate(response.data.dt * 1000);
+    }
+    axios.get(apiurl).then(display);
+    // --------------------
     function search(city) {
         let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
         let myCity = city;
@@ -64,7 +95,10 @@
         function display(response) {
             console.log(response.data);
             let tempid = document.querySelector("#tmp");
-            tempid.innerHTML = response.data.main.temp;
+            tempid.innerHTML = (response.data.main.temp);
+            celsius = (response.data.main.temp);
+            console.log(celsius);
+
             let city = document.querySelector("#cityNameH");
             city.innerHTML = response.data.name;
             let description = document.querySelector("#desc");
@@ -83,7 +117,6 @@
             dispDate.innerHTML = formatDate(response.data.dt * 1000);
         }
         axios.get(apiurl).then(display);
-
     }
     function handelSearch(event) {
         event.preventDefault();
@@ -94,6 +127,29 @@
 
     let form = document.querySelector("#searchForm");
     form.addEventListener("submit", handelSearch);
+
+    function showFahrenheit(event) {
+        event.preventDefault();
+        celsiusLink.classList.add("active");
+        fahrenheitLink.classList.remove("active");
+        let fTemp = (celsius * 9) / 5 + 32;
+        let tempid = document.querySelector("#tmp");
+        tempid.innerHTML = Math.round(fTemp);
+    }
+    // ------------------------------------------------------------
+    function showCelsius(event) {
+        event.preventDefault();
+        celsiusLink.classList.remove("active");
+        fahrenheitLink.classList.add("active");
+        let tempid = document.querySelector("#tmp");
+        tempid.innerHTML = celsius;
+    }
+    let celsius = null;
+    let celsiusLink = document.querySelector("#c");
+    celsiusLink.addEventListener("click", showCelsius);
+
+    let fahrenheitLink = document.querySelector("#f");
+    fahrenheitLink.addEventListener("click", showFahrenheit);
 
 </script>
 
