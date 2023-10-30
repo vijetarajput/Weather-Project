@@ -15,7 +15,7 @@
 .main {
   display: block;
   margin: 0 auto;
-  height: 300px;
+  height: 500px;
   max-width: 600px;
   border: 0.5px solid black;
   border-radius: 5px;
@@ -99,4 +99,19 @@ h6 {
 }
 #desc {
   text-transform: capitalize;
+}
+.weather-forecast {
+  background-color: skyblue;
+  margin: 0 25px 0px 25px;
+}
+.forecast_img {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  left: -5px;
+}
+.column {
+  width: 70px;
+  margin: 0 0 0 10px;
+  border: 2px solid black;
 }

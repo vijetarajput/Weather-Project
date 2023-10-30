@@ -26,7 +26,7 @@
             </div>
             <div class="temp">
                 <div class="cloud"><img id="icon" alt="" src="https://openweathermap.org/img/wn/10d@2x.png" /></div>
-                <h1 id="tmp"> </h1>
+                <h1 id="tmp"></h1>
                 <div id="c" class="degree"><a class="active" href="#">°C </a><span>|</span>
                 </div>
                 <div id="f" class="degree"><a class="active" href="#">°F</a>
@@ -37,6 +37,8 @@
                 <h6 id="Humi" style="display: inline;">10</h6>
                 <h6 style="display: inline;">%</h6>
                 <h6 id="Wind">Wind: <span id="wind">13</span> km/h</h6>
+            </div>
+            <div class="weather-forecast" id="forecast">
             </div>
         </div>
     </div>
@@ -58,6 +60,25 @@
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         let day = days[date.getDay()];
         return `${day} ${hours}:${minutes}`;
+    }
+    //-----------------Forecast-----------------
+    function displayForecast() {
+        let forecastElement = document.querySelector("#forecast");
+        let forcastHtml = `<div class="row">`;
+        let days = ["Mon", "Tue", "Wed", "Thu"];
+        days.forEach(function (day) {
+            forcastHtml = forcastHtml +
+                `<div class="col-2 column">
+                    <div class=" weather-forecast-date">${day}</div>
+                    <img class="forecast_img" id="icon" alt="" src="https://openweathermap.org/img/wn/10d@2x.png" />
+                    <div class="weather-forecast-temperature">
+                        <span class="weather-forecast-temperature-max">18</span>
+                        <span class="weather-forecast-temperature-min">18</span>
+                    </div>
+                </div >`;
+        });
+        forcastHtml = forcastHtml + `</div>`;
+        forecastElement.innerHTML = forcastHtml;
     }
     // ---------------------
     let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
@@ -85,6 +106,7 @@
 
         let dispDate = document.querySelector("#date");
         dispDate.innerHTML = formatDate(response.data.dt * 1000);
+        displayForecast()
     }
     axios.get(apiurl).then(display);
     // --------------------
