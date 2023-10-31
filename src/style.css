@@ -15,7 +15,7 @@
 .main {
   display: block;
   margin: 0 auto;
-  height: 500px;
+  height: 450px;
   max-width: 600px;
   border: 0.5px solid black;
   border-radius: 5px;
@@ -101,8 +101,7 @@ h6 {
   text-transform: capitalize;
 }
 .weather-forecast {
-  background-color: skyblue;
-  margin: 0 25px 0px 25px;
+  margin: 0 10px 0px 12px;
 }
 .forecast_img {
   height: 50px;
@@ -111,7 +110,24 @@ h6 {
   left: -5px;
 }
 .column {
-  width: 70px;
-  margin: 0 0 0 10px;
-  border: 2px solid black;
+  width: 79px;
+  margin: 0 0 0 5px;
+}
+.column:hover {
+  background-color: gainsboro;
+}
+.weather-forecast-date {
+  text-align: center;
+}
+.forecast_img {
+  text-align: center;
+}
+.weather-forecast-temperature {
+  text-align: center;
+}
+.weather-forecast-temperature-max {
+  font-weight: 500;
+}
+.weather-forecast-temperature-min {
+  font-weight: 350;
 }

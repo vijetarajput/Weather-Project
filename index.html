@@ -46,6 +46,10 @@
             style="text-decoration: none;">Open-source code </a>by Vijeta Singh</p>
 </body>
 <script>
+    let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
+    let myCity = "london";
+    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
+    // ----------------------------------------------------------------------------------------------------------
     function formatDate(timestamp) {
         let date = new Date(timestamp);
         let hours = date.getHours();
@@ -68,11 +72,10 @@
         let day = days[date.getDay()];
         return day;
     }
-
     function displayForecast(response) {
 
         let forecast = response.data.daily;
-        console.log(response.data.daily);
+        // console.log(response.data.daily);
 
         let forecastElement = document.querySelector("#forecast");
 
@@ -80,29 +83,25 @@
         forecast.forEach(function (forecastDay) {
             forcastHtml = forcastHtml +
                 `<div class="col-2 column">
-                    <div class=" weather-forecast-date">${formateForecastDay(forecastDay.time)}</div>
+                    <div class="weather-forecast-date">${formateForecastDay(forecastDay.time)}</div>
                     <img class="forecast_img" id="icon" alt="" src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.condition.icon}.png" />
                     <div class="weather-forecast-temperature">
-                        <span class="weather-forecast-temperature-max">${forecastDay.temperature.maximum}</span>
-                        <span class="weather-forecast-temperature-min">${forecastDay.temperature.minimum}</span>
+                        <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temperature.maximum)}°</span>
+                        <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temperature.minimum)}°</span>
                     </div>
                 </div >`;
         });
         forcastHtml = forcastHtml + `</div>`;
         forecastElement.innerHTML = forcastHtml;
     }
-
     function getForecast(coords) {
-        console.log(coords);
+        // console.log(coords);
         let Apikey = "03ob4taaa6f366304d608c02ae4ad453";
-        let ApiUrl = `https://api.shecodes.io/weather/v1/forecast?query=london&key=${Apikey}&units=metric`;
-        console.log(ApiUrl);
+        let ApiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coords.lon}&lat=${coords.lat}&key=${Apikey}&units=metric`;
+        // console.log(ApiUrl);
         axios.get(ApiUrl).then(displayForecast);
     }
     // --------------------------------------------------------------------
-    let apikey = "08f21c358ceb7bbd0f79880f5ba5bbf3";
-    let myCity = "london";
-    let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
     function display(response) {
         // console.log(response.data);
         let tempid = document.querySelector("#tmp");
@@ -134,6 +133,7 @@
         let myCity = city;
         let apiurl = `https://api.openweathermap.org/data/2.5/weather?q=${myCity}&appid=${apikey}&units=metric`;
         axios.get(apiurl).then(display);
+
     }
     function handelSearch(event) {
         event.preventDefault();
